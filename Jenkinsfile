@@ -30,11 +30,11 @@ pipeline {
                 script {
                     echo 'Registering the metadata'
                     def artifactId = registerBuildArtifactMetadata(
-                        name: "My TestApp",
-                        version: "3.0.0",
+                        name: "My New TestApp",
+                        version: "1.0.0",
                         type: "docker",
                         url: "http://localhost:1112",
-                        digest: "62656064707039346163693931",
+                        digest: "45656064707039346163693937",
                         label: "pre-prod"
                     )
                     echo "Artifact Id is: ${artifactId}"
