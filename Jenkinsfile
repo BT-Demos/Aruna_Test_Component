@@ -24,23 +24,33 @@ pipeline {
             steps {
                 junit 'target/surefire-reports/*.xml'
             }
-        }*/
+        }
         stage('Registering build artifact') {
             steps {
                 script {
                     echo 'Registering the metadata'
                     def artifactId = registerBuildArtifactMetadata(
                         name: "My New TestApp",
-                        version: "1.0.0",
+                        version: "2.0.0",
                         type: "docker",
                         url: "http://localhost:1112",
                         digest: "45656064707039346163693937",
-                        label: "pre-prod"
+                        label: "bug-bash"
                     )
                     echo "Artifact Id is: ${artifactId}"
                     env.ARTIFACT_ID = artifactId
                     sleep 3
                 }
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying...'
+                registerDeployedArtifactMetadata(
+                    artifactId: "${env.ARTIFACT_ID}",
+                    targetEnvironment: "pre-prod",
+                    labels: "CBCI"
+                )
             }
         }
         stage('Deploy to Preprod') {
@@ -62,6 +72,6 @@ pipeline {
                     labels: "qa"
                 )
             }
-        }
+        }*/
     }
 }
