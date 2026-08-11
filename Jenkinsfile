@@ -24,7 +24,7 @@ pipeline {
             steps {
                 junit 'target/surefire-reports/*.xml'
             }
-        }
+        }*/
         stage('Registering build artifact') {
             steps {
                 script {
@@ -53,7 +53,7 @@ pipeline {
                 )
             }
         }
-        stage('Deploy to Preprod') {
+        /*stage('Deploy to Preprod') {
             steps {
                 echo 'Deploying...'
                 registerDeployedArtifactMetadata(
