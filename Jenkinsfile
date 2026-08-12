@@ -31,7 +31,7 @@ pipeline {
                     echo 'Registering the metadata'
                     def artifactId = registerBuildArtifactMetadata(
                         name: "My New TestApp",
-                        version: "5.0.0",
+                        version: "6.0.0",
                         type: "docker",
                         url: "http://localhost:1112",
                         digest: "98686064707039346163693937",
@@ -50,6 +50,16 @@ pipeline {
                     artifactId: "${env.ARTIFACT_ID}",
                     targetEnvironment: "CBCI",
                     labels: "CBCI"
+                )
+            }
+        }
+        stage('Deploy2') {
+            steps {
+                echo 'Deploying...'
+                registerDeployedArtifactMetadata(
+                    artifactId: "${env.ARTIFACT_ID}",
+                    targetEnvironment: "Aruna_Test",
+                    labels: "Aruna_Test"
                 )
             }
         }
