@@ -45,7 +45,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                echo 'Deploying...'
+                echo 'Deploying.....'
                 registerDeployedArtifactMetadata(
                     artifactId: "${env.ARTIFACT_ID}",
                     targetEnvironment: "CBCI",
